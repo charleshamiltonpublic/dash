@@ -23,6 +23,7 @@ import {memoizeOne} from 'core/memoizer';
 import getFormatter from 'dash-table/type/formatter';
 import {shallowClone} from 'core/math/matrixZipMap';
 import CellMarkdown from 'dash-table/components/CellMarkdown';
+import CellCheckbox from 'dash-table/components/CellCheckbox';
 import Markdown from 'dash-table/utils/Markdown';
 
 const mapData = R.addIndex<Datum, JSX.Element[]>(R.map);
@@ -33,7 +34,8 @@ enum CellType {
     DropdownLabel,
     Input,
     Label,
-    Markdown
+    Markdown,
+    Checkbox
 }
 
 function getCellType(
@@ -54,6 +56,8 @@ function getCellType(
                 : CellType.Dropdown;
         case Presentation.Markdown:
             return CellType.Markdown;
+        case Presentation.Checkbox:
+            return CellType.Checkbox;
         default:
             return !active || !editable || is_loading
                 ? CellType.Label
@@ -235,6 +239,21 @@ class Contents {
                         className={className}
                         markdown={markdown}
                         value={datum[column.id]}
+                    />
+                );
+            case CellType.Checkbox:
+                return (
+                    <CellCheckbox
+                        key={`column-${columnIndex}`}
+                        active={active}
+                        applyFocus={applyFocus}
+                        onChange={this.handlers(
+                            Handler.Change,
+                            rowIndex,
+                            columnIndex
+                        )}
+                        value={datum[column.id]}
+                        disabled={data_loading}
                     />
                 );
             case CellType.DropdownLabel:

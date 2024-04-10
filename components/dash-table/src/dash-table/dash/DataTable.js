@@ -183,7 +183,7 @@ export const propTypes = {
              * columns with type 'text'.  See 'dropdown' for more info.
              * Defaults to 'input' for ['datetime', 'numeric', 'text', 'any'].
              */
-            presentation: PropTypes.oneOf(['input', 'dropdown', 'markdown']),
+            presentation: PropTypes.oneOf(['input', 'dropdown', 'markdown', 'checkbox']),
 
             /**
              * If true, the user can select the column by clicking on the checkbox or radio button

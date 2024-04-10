@@ -147,7 +147,8 @@ export enum ChangeFailure {
 export enum Presentation {
     Dropdown = 'dropdown',
     Input = 'input',
-    Markdown = 'markdown'
+    Markdown = 'markdown',
+    Checkbox = 'checkbox'
 }
 
 export interface IChangeOptions {
